@@ -13,6 +13,15 @@ namespace WebScraper
             var html = httpClient.GetStringAsync(url).Result;
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);
+
+            var temperatureElement = htmlDocument.DocumentNode.SelectSingleNode("//span[@class='CurrentConditions--tempValue--MHmYY']");
+            var temperature = temperatureElement.InnerText.Trim();
+            Console.WriteLine("Temperature: " + temperature);
+
+            var conditionElement = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='CurrentConditions--phraseValue--mZC_p']");
+            var conditions = conditionElement.InnerText.Trim();
+            Console.WriteLine("Conditions: " + conditions);
+
         }
     }
 }
